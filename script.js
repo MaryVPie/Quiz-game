@@ -4,7 +4,7 @@ var timeEl = document.querySelector(".time");
 // Selects element by id
 var mainEl = document.getElementById("main");
 
-var secondsLeft = 10;
+var secondsLeft = 2;
 
 function setTime() {
   // Sets interval in variable
@@ -26,7 +26,10 @@ function setTime() {
 function sendMessage() {
   timeEl.textContent = " ";
   var imgEl = document.createElement("img");
-  imgEl.setAttribute("src", "Thats-all.jpg");
+  imgEl.setAttribute("src", "images/Thats-all.jpg");
+//   imgEl.setAttribute("width", "200px");
+//   imgEl.setAttribute("height", "200px");
+  imgEl.classList.add("img");
   mainEl.appendChild(imgEl);
 
 }

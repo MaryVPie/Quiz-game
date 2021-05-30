@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href=".\style.css">
     <title>Quizgame</title>
 </head>
 <body>
    
-    <div>
+    <div class="d-flex flex-row bd-highlight mb-2">
         <div>
-                View Highscores    <!-- Should it show all scores which was submitted by clicking on the button at the end? -->
+            <button type="button" class="btn btn-primary rounded-pill">View Highscores</button>
+                <!--View Highscores     Should it show all scores which was submitted by clicking on the button at the end? -->
+                <!--<h1 style="text-align:left;">View Highscores</h1>-->
         </div>
         <div> <!-- Time: Must be shown timer-->
-            <h1 class="time" style="text-align:right;"></h1>
+            <h1 class="time" style="text-align:center;">Time to begin!</h1>
                
         </div>
     </div>
-    <div id="main"></div>
+    <div id="main" class="main-cont"></div>
     <script src="./script.js"></script>
     <container>
 
