@@ -14,3 +14,9 @@ body {
 .hidden {
     display: none;
 }
+.correct {
+    color: green;
+}
+.ul-questions {
+    list-style: none;
+}
