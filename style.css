@@ -17,8 +17,8 @@ body {
 .correct {
     color: green;
 }
-.ul-questions {
-    list-style: none;
+.ol-questions {
+    list-style:lower-alpha;
 }
 
 .wrong {

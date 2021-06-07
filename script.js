@@ -224,26 +224,24 @@ function renderQuestion(element) {
   let q = result[idx];
   console.log(q);
 
-  var ulQuestion = document.createElement("ul");
-  ulQuestion.classList.add("ul-questions");
+  var olQuestion = document.createElement("ol");
+  olQuestion.classList.add("ol-questions");
   q.wasAsked = true;
 
   for (let i = 0; i < q.answers.length; i++) {
     const el = q.answers[i];
-    renderAnswer(ulQuestion, el, q.id);
+    renderAnswer(olQuestion, el, q.id);
   }
 
   let headQ = document.createElement("h2");
   headQ.innerHTML = q.text;
 
   element.appendChild(headQ);
-  element.appendChild(ulQuestion);
+  element.appendChild(olQuestion);
 
 }
-
-
-
-function renderAnswer(ulQuestion, answer, questionId) {
+//function renders answers
+function renderAnswer(olQuestion, answer, questionId) {
   let el = document.createElement("li");
   el.classList.add("li-answers");
   el.setAttribute("id", answer.id);
@@ -252,16 +250,16 @@ function renderAnswer(ulQuestion, answer, questionId) {
   el.innerHTML = answer.text;
   el.addEventListener("click", processAnswer);
 
-  ulQuestion.appendChild(el);
+  olQuestion.appendChild(el);
 }
 
 function processAnswer() {
-  // this gives you the element which triggered the event (in our case it is li element and we know it)
+  // this gives the element which triggered the event (in our case it is li element and we know it)
   let triggeredLi = this;
   var questionContainer = document.querySelector("#questionContainer");
   questionContainer.innerHTML = '';
   renderQuestion(questionContainer);
-  //1. затереть Inner html in index.html block with id "bla" line
+  
   //2. Обработать вопрос:
   //  2.1 достать ид вопроса из triggerli (getAttribute(<attributeName>)) и достать ид данного ответа из triggerli (см 108 и 109 за именами атриьутов и логикой)
   //  2.2 начти по ид вопроса из 2.1 в коллекции questions соответствующий вопрос.
@@ -312,7 +310,10 @@ function endQuiz(timer, timeEl) {
 
   questionContainer.classList.add("hidden");
 
+  calculateScore();
 
+  var buttonHighScore = document.querySelector("#score-container");
+  buttonHighScore.classList.remove("hidden");
 
   //questionContainer.classList.remove("hidden");
 }
@@ -321,6 +322,7 @@ function calculateScore() {
 
 }
 
+//generate random value from 0 to max not including max
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
