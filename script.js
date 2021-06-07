@@ -4,7 +4,7 @@ var questions = [
   {
     id:1,
     color: "purple",
-    text: "times new roman",
+    text: "What is an arrangement of words and symbols in a language?",
     penalty: 20,
     wasAsked: false,
     correctInput: false,
@@ -13,13 +13,25 @@ var questions = [
     answers: [
       {
         class: "correct",
-        text: "Arial",
+        text: "Syntax",
         isCorrect: true,
         id: 11
       },
       {
         class: "wrong",
-        text: "conob=sdfshh",
+        text: "CSS",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "Class",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "element",
         isCorrect: false,
         id: 10
       },
@@ -28,7 +40,7 @@ var questions = [
   {
     id:2,
     color: "purple",
-    text: "times new roman",
+    text: "The part of the CSS rule which specifies HOW the property/attribute will be modified:",
     penalty: 20,
     wasAsked: false,
     correctInput: false,
@@ -37,20 +49,140 @@ var questions = [
     answers: [
       {
         class: "correct",
-        text: "asdsadsadasdsa",
+        text: "value",
         isCorrect: true,
         id: 11
       },
       {
         class: "wrong",
-        text: "77777777",
+        text: "property",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "element",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "type",
+        isCorrect: false,
+        id: 10
+      },
+    ]
+  },
+  {
+    id:3,
+    color: "purple",
+    text: "Which are types of variable scope?",
+    penalty: 20,
+    wasAsked: false,
+    correctInput: false,
+    scoreGen: 1,
+
+    answers: [
+      {
+        class: "correct",
+        text: "Local and Global",
+        isCorrect: true,
+        id: 11
+      },
+      {
+        class: "wrong",
+        text: "Local and Undefied",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "Variables have not any types",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "String and index",
+        isCorrect: false,
+        id: 10
+      },
+    ]
+  },
+  {
+    id:4,
+    color: "purple",
+    text: "javascript starts counting on what?",
+    penalty: 20,
+    wasAsked: false,
+    correctInput: false,
+    scoreGen: 1,
+
+    answers: [
+      {
+        class: "correct",
+        text: "0",
+        isCorrect: true,
+        id: 11
+      },
+      {
+        class: "wrong",
+        text: "1",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "any number as you wish",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "1 or any number as you wish",
+        isCorrect: false,
+        id: 10
+      },
+    ]
+  },
+  {
+    id:5,
+    color: "purple",
+    text: "What does <a> mean in HTML?",
+    penalty: 20,
+    wasAsked: false,
+    correctInput: false,
+    scoreGen: 1,
+
+    answers: [
+      {
+        class: "correct",
+        text: "Defines a hyperlink",
+        isCorrect: true,
+        id: 11
+      },
+      {
+        class: "wrong",
+        text: "Defines an abbreviation",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "Not supported in HTML 5",
+        isCorrect: false,
+        id: 10
+      },
+      {
+        class: "wrong",
+        text: "Defines an address element",
         isCorrect: false,
         id: 10
       },
     ]
   }
- 
 ];
+
 let sessionHighscore =0;
 
 // Selects element by class
