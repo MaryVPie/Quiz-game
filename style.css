@@ -4,6 +4,20 @@ body {
     margin-right: 50px;
     
 }
+
+.h1 {
+    color: blue;
+    text-align: center;
+}
+
+.start-btn {
+        padding: 8px 16px;
+        width: 300px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
+
 .img {
     height: 600px;
     width: 800px;
@@ -30,3 +44,4 @@ body {
     font-family: "Trirong", serif;
     /* border-bottom: black solid 2px; */
 }
+
