@@ -1,5 +1,3 @@
-
-
 //Quiz questions
 
 var questions = [
@@ -14,24 +12,47 @@ var questions = [
 
     answers: [
       {
-        color: "green",
+        class: "correct",
         text: "Arial",
         isCorrect: true,
         id: 11
       },
       {
-        color: "yellow",
+        class: "wrong",
         text: "conob=sdfshh",
         isCorrect: false,
         id: 10
       },
     ]
   },
+  {
+    id:2,
+    color: "purple",
+    text: "times new roman",
+    penalty: 20,
+    wasAsked: false,
+    correctInput: false,
+    scoreGen: 1,
+
+    answers: [
+      {
+        class: "correct",
+        text: "asdsadsadasdsa",
+        isCorrect: true,
+        id: 11
+      },
+      {
+        class: "wrong",
+        text: "77777777",
+        isCorrect: false,
+        id: 10
+      },
+    ]
+  }
  
 ];
 let sessionHighscore =0;
 
-//questions[0].text
 // Selects element by class
 var timeEl = document.querySelector(".time");
 
@@ -39,32 +60,6 @@ var timeEl = document.querySelector(".time");
 var mainEl = document.getElementById("main");
 
 var secondsLeft = 10;
-
-function setTime() {
-  // Sets interval in variable
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.textContent = "Time: " + secondsLeft;
-
-    if(secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
-      // Calls function to create and append image
-      sendMessage();
-    }
-
-  }, 1000);
-}
-
-// Function to create and append colorsplosion image
-function sendMessage() {
-  timeEl.textContent = " ";
-  var imgEl = document.createElement("img");
-  imgEl.setAttribute("src", "images/Thats-all.jpg");
-  imgEl.classList.add("img");
-  mainEl.appendChild(imgEl);
-
-}
 
 var btnStart = document.querySelector("#starts-quiz");
 
@@ -78,8 +73,8 @@ function startQuiz() {
   //shows question block
   var quizMainBlock = document.querySelector("#quiz-main");
   quizMainBlock.classList.remove("hidden");
-
-  renderQuestion(quizMainBlock);
+  var bla = document.querySelector("#bla");
+  renderQuestion(bla);
 
   //starts timer
   setTime();
@@ -93,21 +88,26 @@ function renderQuestion(element)
   let q =  result[idx];
   console.log(q);
 
-  var ulQuestions = document.createElement("ul");
-  ulQuestions.classList.add("ul-questions");
+  var ulQuestion = document.createElement("ul");
+  ulQuestion.classList.add("ul-questions");
+  q.wasAsked = true;
 
   for (let i = 0; i < q.answers.length; i++) {
     const el = q.answers[i];
-    renderAnswer(ulQuestions, el, q.id);
+    renderAnswer(ulQuestion, el, q.id);
   }
 
-  element.appendChild(ulQuestions);
 
+
+  let headQ = document.createElement("h2");
+  headQ.innerHTML = q.text;
+
+  element.appendChild(headQ);
+  element.appendChild(ulQuestion);
+ 
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+
 
 function renderAnswer(ulQuestion, answer,questionId) 
 {
@@ -125,5 +125,46 @@ function renderAnswer(ulQuestion, answer,questionId)
 function processAnswer() {
   // this gives you the element which triggered the event (in our case it is li element and we know it)
   let triggeredLi = this;
+  var bla = document.querySelector("#bla");
+  bla.innerHTML ='';
+  renderQuestion(bla);
+//1. затереть Inner html in index.html block with id "bla" line
+//2. Обработать вопрос:
+//  2.1 достать ид вопроса из triggerli (getAttribute(<attributeName>)) и достать ид данного ответа из triggerli (см 108 и 109 за именами атриьутов и логикой)
+//  2.2 начти по ид вопроса из 2.1 в коллекции questions соответствующий вопрос.
+//  2.3 найти по ид ответа в ответаъ на вопрос из 2.2 ответ данный пользователем (мы знаем какой т.к. он кдикнуо на li и мы достали ид ответа на шаге 2.1)
+//  2.4 Посмотерть дал ли он правильный ответ (свойство isCorrect) в ответе полученном на шаге 2.3
+//    2.4.1 Если да, повысить глобальный скор,
+//3. Показать новый вопрос (renderQuestion(bla))
   console.log(this);
+}
+
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = "Time: " + secondsLeft;
+
+    if(secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append image
+      sendMessage();
+    }
+
+  }, 1000);
+}
+
+// Function to create and append image at the end of the quiz
+function sendMessage() {
+  timeEl.textContent = " ";
+  var imgEl = document.createElement("img");
+  imgEl.setAttribute("src", "images/Thats-all.jpg");
+  imgEl.classList.add("img");
+  mainEl.appendChild(imgEl);
+
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }

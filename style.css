@@ -20,3 +20,13 @@ body {
 .ul-questions {
     list-style: none;
 }
+
+.wrong {
+    color:indianred;
+}
+
+.li-answers {
+    color: black;
+    font-family: "Trirong", serif;
+    /* border-bottom: black solid 2px; */
+}
