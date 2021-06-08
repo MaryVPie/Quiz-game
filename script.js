@@ -185,12 +185,8 @@ var questions = [
 
 let sessionHighscore = 0;
 
-
-
 // Selects element by id
 var mainEl = document.getElementById("main");
-
-
 
 var btnStart = document.querySelector("#starts-quiz");
 
@@ -322,6 +318,10 @@ function endQuiz(timer, timeEl) {
   imgEl.setAttribute("src", "images/Thats-all.jpg");
   imgEl.classList.add("img");
   mainEl.appendChild(imgEl);
+//function stoppes showing the image
+  setTimeout(function() {
+    imgEl.classList.add("hidden");
+  }, 1000);
 
   var questionContainer = document.querySelector("#questionContainer");
 
@@ -329,11 +329,12 @@ function endQuiz(timer, timeEl) {
 
   calculateScore();
 
+
   var buttonHighScore = document.querySelector("#score-container");
   buttonHighScore.classList.remove("hidden");
 
-  //questionContainer.classList.remove("hidden");
 }
+
 
 function calculateScore() {
 
