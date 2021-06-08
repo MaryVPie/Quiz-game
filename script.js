@@ -27,13 +27,13 @@ var questions = [
         class: "wrong",
         text: "Class",
         isCorrect: false,
-        id: 10
+        id: 12
       },
       {
         class: "wrong",
         text: "element",
         isCorrect: false,
-        id: 10
+        id: 13
       },
     ]
   },
@@ -51,25 +51,25 @@ var questions = [
         class: "correct",
         text: "value",
         isCorrect: true,
-        id: 11
+        id: 14
       },
       {
         class: "wrong",
         text: "property",
         isCorrect: false,
-        id: 10
+        id: 15
       },
       {
         class: "wrong",
         text: "element",
         isCorrect: false,
-        id: 10
+        id: 16
       },
       {
         class: "wrong",
         text: "type",
         isCorrect: false,
-        id: 10
+        id: 17
       },
     ]
   },
@@ -87,25 +87,25 @@ var questions = [
         class: "correct",
         text: "Local and Global",
         isCorrect: true,
-        id: 11
+        id: 18
       },
       {
         class: "wrong",
         text: "Local and Undefied",
         isCorrect: false,
-        id: 10
+        id: 19
       },
       {
         class: "wrong",
         text: "Variables have not any types",
         isCorrect: false,
-        id: 10
+        id: 20
       },
       {
         class: "wrong",
         text: "String and index",
         isCorrect: false,
-        id: 10
+        id: 21
       },
     ]
   },
@@ -123,25 +123,25 @@ var questions = [
         class: "correct",
         text: "0",
         isCorrect: true,
-        id: 11
+        id: 22
       },
       {
         class: "wrong",
         text: "1",
         isCorrect: false,
-        id: 10
+        id: 23
       },
       {
         class: "wrong",
         text: "any number as you wish",
         isCorrect: false,
-        id: 10
+        id: 24
       },
       {
         class: "wrong",
         text: "1 or any number as you wish",
         isCorrect: false,
-        id: 10
+        id: 25
       },
     ]
   },
@@ -171,13 +171,13 @@ var questions = [
         class: "wrong",
         text: "Not supported in HTML 5",
         isCorrect: false,
-        id: 10
+        id: 12
       },
       {
         class: "wrong",
         text: "Defines an address element",
         isCorrect: false,
-        id: 10
+        id: 13
       },
     ]
   }
@@ -249,16 +249,33 @@ function renderAnswer(olQuestion, answer, questionId) {
   el.setAttribute("isCorrect", answer.isCorrect);
   el.innerHTML = answer.text;
   el.addEventListener("click", processAnswer);
-
+  
   olQuestion.appendChild(el);
 }
 
 function processAnswer() {
   // this gives the element which triggered the event (in our case it is li element and we know it)
   let triggeredLi = this;
+  let questionId = triggeredLi.getAttribute("questionId");
+  let answerId = triggeredLi.getAttribute("id");
+  let isCorrect = triggeredLi.getAttribute("iscorrect") == 'true';
   var questionContainer = document.querySelector("#questionContainer");
   questionContainer.innerHTML = '';
   renderQuestion(questionContainer);
+debugger;
+  let correctnessDiv = document.querySelector("#correctness");
+  correctnessDiv.innerHTML = '';
+  correctnessDiv.classList.remove("hidden");
+  if (isCorrect) {
+    correctnessDiv.innerHTML = "Correct!"
+  }
+  else {
+    correctnessDiv.innerHTML = "Wrong!"
+  }
+
+  setTimeout(function() {
+    correctnessDiv.classList.add("hidden");
+  }, 700);
   
   //2. Обработать вопрос:
   //  2.1 достать ид вопроса из triggerli (getAttribute(<attributeName>)) и достать ид данного ответа из triggerli (см 108 и 109 за именами атриьутов и логикой)
@@ -274,7 +291,7 @@ var timerInterval = null;
 
 function setTime() {
 
-  var secondsLeft = 10;
+  var secondsLeft = 20;
 
   // Selects element by class
   var timeEl = document.querySelector(".time");
