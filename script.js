@@ -321,7 +321,17 @@ function endQuiz(timer, timeEl) {
 //function stoppes showing the image
   setTimeout(function() {
     imgEl.classList.add("hidden");
-  }, 1000);
+
+    var buttonHighScore = document.querySelector("#score-container");
+    buttonHighScore.classList.remove("hidden");
+
+    var buttonRestart = document.querySelector("#restart-btn");
+    buttonRestart.classList.remove("hidden");
+  
+    var buttonClearScore = document.querySelector("#clear-score-btn");
+    buttonClearScore.classList.remove("hidden");
+
+  }, 2000);
 
   var questionContainer = document.querySelector("#questionContainer");
 
@@ -330,8 +340,9 @@ function endQuiz(timer, timeEl) {
   calculateScore();
 
 
-  var buttonHighScore = document.querySelector("#score-container");
-  buttonHighScore.classList.remove("hidden");
+ 
+
+ 
 
 }
 
