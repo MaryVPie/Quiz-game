@@ -52,3 +52,9 @@ body {
     /* border-bottom: black solid 2px; */
 }
 
+.center {
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+  }

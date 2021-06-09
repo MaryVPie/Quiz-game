@@ -322,6 +322,9 @@ function endQuiz(timer, timeEl) {
   setTimeout(function() {
     imgEl.classList.add("hidden");
 
+    var formDone = document.querySelector("#form");
+    formDone.classList.remove("hidden");
+
     var buttonHighScore = document.querySelector("#score-container");
     buttonHighScore.classList.remove("hidden");
 
@@ -339,13 +342,12 @@ function endQuiz(timer, timeEl) {
 
   calculateScore();
 
-
- 
-
- 
-
 }
 
+function formFunction() {
+  var nameInitia = document.getElementById("myText").form.id;
+  document.getElementById("demo").innerHTML = nameInitia;
+}
 
 function calculateScore() {
 
