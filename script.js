@@ -5,10 +5,10 @@ var questions = [
     id: 1,
     color: "purple",
     text: "What is an arrangement of words and symbols in a language?",
-    penalty: 20,
+    penalty: 3,
     wasAsked: false,
     correctInput: false,
-    scoreGen: 1,
+    scoreGen: 5,
 
     answers: [
       {
@@ -41,10 +41,10 @@ var questions = [
     id: 2,
     color: "purple",
     text: "The part of the CSS rule which specifies HOW the property/attribute will be modified:",
-    penalty: 20,
+    penalty: 3,
     wasAsked: false,
     correctInput: false,
-    scoreGen: 1,
+    scoreGen: 5,
 
     answers: [
       {
@@ -77,10 +77,10 @@ var questions = [
     id: 3,
     color: "purple",
     text: "Which are types of variable scope?",
-    penalty: 20,
+    penalty: 3,
     wasAsked: false,
     correctInput: false,
-    scoreGen: 1,
+    scoreGen: 5,
 
     answers: [
       {
@@ -113,10 +113,10 @@ var questions = [
     id: 4,
     color: "purple",
     text: "javascript starts counting on what?",
-    penalty: 20,
+    penalty: 3,
     wasAsked: false,
     correctInput: false,
-    scoreGen: 1,
+    scoreGen: 5,
 
     answers: [
       {
@@ -149,10 +149,10 @@ var questions = [
     id: 5,
     color: "purple",
     text: "What does &lta&gt mean in HTML?",
-    penalty: 20,
+    penalty: 3,
     wasAsked: false,
     correctInput: false,
-    scoreGen: 1,
+    scoreGen: 5,
 
     answers: [
       {
@@ -211,9 +211,9 @@ function startQuiz() {
 function renderQuestion(element) {
   let result = questions.filter(question => !question.wasAsked);
   if (result.length === 0) {
-
     let timeEl = document.querySelector(".time"); 
     endQuiz(timerInterval, timeEl);
+    return;
   }
 
   let idx = getRandomInt(result.length);
@@ -250,15 +250,18 @@ function renderAnswer(olQuestion, answer, questionId) {
 }
 
 function processAnswer() {
+
   // this gives the element which triggered the event (in our case it is li element and we know it)
   let triggeredLi = this;
   let questionId = triggeredLi.getAttribute("questionId");
+  let quest = questions.find(x => x.id == questionId);
   let answerId = triggeredLi.getAttribute("id");
   let isCorrect = triggeredLi.getAttribute("iscorrect") == 'true';
+  quest.correctInput = isCorrect;
   var questionContainer = document.querySelector("#questionContainer");
   questionContainer.innerHTML = '';
   renderQuestion(questionContainer);
-debugger;
+// debugger;
   let correctnessDiv = document.querySelector("#correctness");
   correctnessDiv.innerHTML = '';
   correctnessDiv.classList.remove("hidden");
@@ -268,18 +271,11 @@ debugger;
   else {
     correctnessDiv.innerHTML = "Wrong!"
   }
-
+  //debugger;
   setTimeout(function() {
     correctnessDiv.classList.add("hidden");
   }, 700);
   
-  //2. Обработать вопрос:
-  //  2.1 достать ид вопроса из triggerli (getAttribute(<attributeName>)) и достать ид данного ответа из triggerli (см 108 и 109 за именами атриьутов и логикой)
-  //  2.2 начти по ид вопроса из 2.1 в коллекции questions соответствующий вопрос.
-  //  2.3 найти по ид ответа в ответаъ на вопрос из 2.2 ответ данный пользователем (мы знаем какой т.к. он кдикнуо на li и мы достали ид ответа на шаге 2.1)
-  //  2.4 Посмотерть дал ли он правильный ответ (свойство isCorrect) в ответе полученном на шаге 2.3
-  //    2.4.1 Если да, повысить глобальный скор,
-  //3. Показать новый вопрос (renderQuestion(bla))
   console.log(this);
 }
 
@@ -297,8 +293,6 @@ function setTime() {
     timeEl.textContent = "Time: " + secondsLeft;
 
     if (secondsLeft === 0) {
-
-
       // Calls function to create and append image
       endQuiz(timerInterval, timeEl);
     }
@@ -340,18 +334,43 @@ function endQuiz(timer, timeEl) {
 
   questionContainer.classList.add("hidden");
 
-  calculateScore();
+  sessionHighscore = calculateScore();
 
+  let yourScore = document.querySelector("#yourScore");
+  yourScore.innerHTML = "Yor score is: " + sessionHighscore;
+//debugger;
 }
 
 function formFunction() {
-  var nameInitia = document.getElementById("myText").form.id;
-  document.getElementById("demo").innerHTML = nameInitia;
+  console.log('inside form click');
+  
 }
 
 function calculateScore() {
 
+  let score = 0;
+
+  for (let idx = 0; idx < questions.length; idx++) {
+    const qustElement = questions[idx];
+
+    if (qustElement.wasAsked) {
+        if (qustElement.correctInput) {
+          score+=qustElement.scoreGen;
+        }
+        else {
+          score-=qustElement.penalty;
+        }
+    }
+  
+  }
+  if (score < 0) {
+    return 0;
+  }
+  return score;
+
 }
+
+
 
 //generate random value from 0 to max not including max
 function getRandomInt(max) {
