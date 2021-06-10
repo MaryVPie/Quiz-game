@@ -341,10 +341,7 @@ function endQuiz(timer, timeEl) {
 //debugger;
 }
 
-function formFunction() {
-  console.log('inside form click');
-  
-}
+
 
 function calculateScore() {
 
@@ -369,6 +366,40 @@ function calculateScore() {
   return score;
 
 }
+//stores score
+function saveScores() {
+  
+  let namePerson = document.querySelector("#myText");
+
+      const person = {
+      name: namePerson.value,
+      scoring: sessionHighscore
+    }
+  
+  let K = "user_" + person.name;
+
+  window.localStorage.setItem(K, JSON.stringify(person));
+
+  const nameClient = localStorage.getItem(K);
+  console.log(JSON.parse(nameClient));
+  console.log(person);
+}
+
+ //должна вызываться при клике кнопки View Highscores и показывать таблицу
+ for (let i = 0; i < localStorage.length; i++) {
+  let storedValue = localStorage.key(i);
+  console.log(`Item at ${i}: ${storedValue}`);
+} 
+
+//должна чистить весьь Highscore при клике на кнопку Clear Highscore
+
+
+//должна перезапускать запрос вопросов при клике на кнопку restart
+
+
+
+
+
 
 
 
