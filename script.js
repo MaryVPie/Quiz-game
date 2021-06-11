@@ -211,7 +211,7 @@ function startQuiz() {
 function renderQuestion(element) {
   let result = questions.filter(question => !question.wasAsked);
   if (result.length === 0) {
-    let timeEl = document.querySelector(".time"); 
+    let timeEl = document.querySelector(".time");
     endQuiz(timerInterval, timeEl);
     return;
   }
@@ -245,7 +245,7 @@ function renderAnswer(olQuestion, answer, questionId) {
   el.setAttribute("isCorrect", answer.isCorrect);
   el.innerHTML = answer.text;
   el.addEventListener("click", processAnswer);
-  
+
   olQuestion.appendChild(el);
 }
 
@@ -261,7 +261,7 @@ function processAnswer() {
   var questionContainer = document.querySelector("#questionContainer");
   questionContainer.innerHTML = '';
   renderQuestion(questionContainer);
-// debugger;
+  // debugger;
   let correctnessDiv = document.querySelector("#correctness");
   correctnessDiv.innerHTML = '';
   correctnessDiv.classList.remove("hidden");
@@ -272,10 +272,10 @@ function processAnswer() {
     correctnessDiv.innerHTML = "Wrong!"
   }
   //debugger;
-  setTimeout(function() {
+  setTimeout(function () {
     correctnessDiv.classList.add("hidden");
   }, 700);
-  
+
   console.log(this);
 }
 
@@ -312,8 +312,8 @@ function endQuiz(timer, timeEl) {
   imgEl.setAttribute("src", "images/Thats-all.jpg");
   imgEl.classList.add("img");
   mainEl.appendChild(imgEl);
-//function stoppes showing the image
-  setTimeout(function() {
+  //function stoppes showing the image
+  setTimeout(function () {
     imgEl.classList.add("hidden");
 
     var formDone = document.querySelector("#form");
@@ -324,7 +324,7 @@ function endQuiz(timer, timeEl) {
 
     var buttonRestart = document.querySelector("#restart-btn");
     buttonRestart.classList.remove("hidden");
-  
+
     var buttonClearScore = document.querySelector("#clear-score-btn");
     buttonClearScore.classList.remove("hidden");
 
@@ -338,7 +338,7 @@ function endQuiz(timer, timeEl) {
 
   let yourScore = document.querySelector("#yourScore");
   yourScore.innerHTML = "Yor score is: " + sessionHighscore;
-//debugger;
+  //debugger;
 }
 
 
@@ -351,14 +351,14 @@ function calculateScore() {
     const qustElement = questions[idx];
 
     if (qustElement.wasAsked) {
-        if (qustElement.correctInput) {
-          score+=qustElement.scoreGen;
-        }
-        else {
-          score-=qustElement.penalty;
-        }
+      if (qustElement.correctInput) {
+        score += qustElement.scoreGen;
+      }
+      else {
+        score -= qustElement.penalty;
+      }
     }
-  
+
   }
   if (score < 0) {
     return 0;
@@ -368,14 +368,14 @@ function calculateScore() {
 }
 //stores score
 function saveScores() {
-  
+
   let namePerson = document.querySelector("#myText");
 
-      const person = {
-      name: namePerson.value,
-      scoring: sessionHighscore
-    }
-  
+  const person = {
+    name: namePerson.value,
+    scoring: sessionHighscore
+  };
+
   let K = "user_" + person.name;
 
   window.localStorage.setItem(K, JSON.stringify(person));
@@ -385,14 +385,64 @@ function saveScores() {
   console.log(person);
 }
 
- //должна вызываться при клике кнопки View Highscores и показывать таблицу
- for (let i = 0; i < localStorage.length; i++) {
-  let storedValue = localStorage.key(i);
-  console.log(`Item at ${i}: ${storedValue}`);
-} 
+//shows stored results in generated table
+
+function viewScore() {
+
+  var scoreTabl = document.createElement("table");
+
+  let scoreContainer = document.querySelector("#score-container");
+
+  scoreTabl.classList.add("table");
+  var headerTabl = document.createElement("tr");
+  var scoreTh = document.createElement("th");
+  scoreTh.innerHTML = "Score: ";
+  var nameTh = document.createElement("th");
+  nameTh.innerHTML = "Name: ";
+
+  headerTabl.appendChild(scoreTh);
+  headerTabl.appendChild(nameTh);
+  scoreTabl.appendChild(headerTabl);
+
+  scoreContainer.appendChild(scoreTabl);
+
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let storedValue = localStorage.key(i);
+
+    if (storedValue.includes("user_")) {
+
+      // get item from local storage and convert it to javascript object
+      // call render row passing table and javascript object
+      let jsonRes = localStorage.getItem(storedValue);
+      let personRes = JSON.parse(jsonRes);
+
+      renderRow(scoreTabl, personRes);
+
+    }
+    console.log(`Item at ${i}: ${storedValue}`);
+  }
+
+}
+
+function renderRow(tblEl, clicker) {
+  var row = document.createElement("tr");
+  var scoreColumn = document.createElement("td");
+  scoreColumn.innerHTML = clicker.scoring;
+
+  var nameColumn = document.createElement("td");
+  nameColumn.innerHTML = clicker.name;
+
+  row.appendChild(scoreColumn);
+  row.appendChild(nameColumn);
+  tblEl.appendChild(row);
+}
 
 //должна чистить весьь Highscore при клике на кнопку Clear Highscore
 
+function clearScore() {
+  
+}
 
 //должна перезапускать запрос вопросов при клике на кнопку restart
 
