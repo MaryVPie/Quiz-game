@@ -201,12 +201,19 @@ function startQuiz() {
   var quizMainBlock = document.querySelector("#quiz-main");
   quizMainBlock.classList.remove("hidden");
   var questionContainer = document.querySelector("#questionContainer");
+  
+  if (questionContainer.classList.contains("hidden")) {     //true or false
+    questionContainer.classList.remove("hidden");
+  }
+
   renderQuestion(questionContainer);
 
   //starts timer
   setTime();
 
 }
+
+
 //function renders random question
 function renderQuestion(element) {
   let result = questions.filter(question => !question.wasAsked);
@@ -337,7 +344,7 @@ function endQuiz(timer, timeEl) {
   sessionHighscore = calculateScore();
 
   let yourScore = document.querySelector("#yourScore");
-  yourScore.innerHTML = "Yor score is: " + sessionHighscore;
+  yourScore.innerHTML = "Your score is: " + sessionHighscore;
   //debugger;
 }
 
@@ -388,8 +395,16 @@ function saveScores() {
 //shows stored results in generated table
 
 function viewScore() {
-
+  //delete the table if it exists
+  var myTbl = document.getElementById("tableResults");
+  if (myTbl != null) {
+    myTbl.remove();
+  }
+  
   var scoreTabl = document.createElement("table");
+
+
+  scoreTabl.setAttribute("id", "tableResults");
 
   let scoreContainer = document.querySelector("#score-container");
 
@@ -438,13 +453,46 @@ function renderRow(tblEl, clicker) {
   tblEl.appendChild(row);
 }
 
-//должна чистить весьь Highscore при клике на кнопку Clear Highscore
+//remove all entres from local storage and delete table
 
 function clearScore() {
-  
+  var myTbl = document.getElementById("tableResults");
+  myTbl.remove();
+
+  localStorage.clear();
 }
 
-//должна перезапускать запрос вопросов при клике на кнопку restart
+
+
+function restart() {
+ //iterates questions array and resets 2 properties
+  for (let idx = 0; idx < questions.length; idx++) {
+    let quesTion = questions[idx];
+    quesTion.wasAsked = false;
+    quesTion.correctInput = false;
+    }
+    /**
+     * hides buttons and form after clicking restart button
+     */
+    var formDone = document.querySelector("#form");
+    formDone.classList.add("hidden");
+
+    var buttonHighScore = document.querySelector("#score-container");
+    buttonHighScore.classList.add("hidden");
+
+    var buttonRestart = document.querySelector("#restart-btn");
+    buttonRestart.classList.add("hidden");
+
+    var buttonClearScore = document.querySelector("#clear-score-btn");
+    buttonClearScore.classList.add("hidden");
+    /**
+     * ===================================
+     */
+  
+//debugger;
+  startQuiz();
+  
+}
 
 
 
