@@ -321,7 +321,7 @@ function endQuiz(timer, timeEl) {
 
   var imgEl = document.createElement("img");
 
-  imgEl.setAttribute("src", "images/Thats-all.jpg");
+  imgEl.setAttribute("src", "Images/Thats-all.jpg");
   imgEl.classList.add("img");
   mainEl.appendChild(imgEl);
   //function stoppes showing the image
