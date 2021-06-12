@@ -273,9 +273,11 @@ function processAnswer() {
   correctnessDiv.classList.remove("hidden");
   if (isCorrect) {
     correctnessDiv.innerHTML = "Correct!"
+
   }
   else {
     correctnessDiv.innerHTML = "Wrong!"
+    secondsLeft = secondsLeft - quest.penalty;
   }
   //debugger;
   setTimeout(function () {
@@ -285,11 +287,12 @@ function processAnswer() {
   console.log(this);
 }
 
+var secondsLeft = 75;
 var timerInterval = null;
 
 function setTime() {
 
-  var secondsLeft = 20;
+  secondsLeft = 75;
 
   // Selects element by class
   var timeEl = document.querySelector(".time");
@@ -302,7 +305,7 @@ function setTime() {
     secondsLeft--;
     timeEl.textContent = "Time: " + secondsLeft;
 
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
 
       // Calls function to create and append image
       endQuiz(timerInterval, timeEl);
@@ -465,6 +468,11 @@ function clearScore() {
 }
 
 function restart() {
+
+  var myTbl = document.getElementById("tableResults");
+  if (myTbl != null) {
+    myTbl.remove();
+  }
  //iterates questions array and resets 2 properties
   for (let idx = 0; idx < questions.length; idx++) {
     let quesTion = questions[idx];
