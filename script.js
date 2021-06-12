@@ -326,16 +326,7 @@ function endQuiz(timer, timeEl) {
     var formDone = document.querySelector("#form");
     formDone.classList.remove("hidden");
 
-    var buttonHighScore = document.querySelector("#score-container");
-    buttonHighScore.classList.remove("hidden");
-
-    var buttonRestart = document.querySelector("#restart-btn");
-    buttonRestart.classList.remove("hidden");
-
-    var buttonClearScore = document.querySelector("#clear-score-btn");
-    buttonClearScore.classList.remove("hidden");
-
-  }, 2000);
+     }, 2000);
 
   var questionContainer = document.querySelector("#questionContainer");
 
@@ -390,6 +381,14 @@ function saveScores() {
   const nameClient = localStorage.getItem(K);
   console.log(JSON.parse(nameClient));
   console.log(person);
+
+  var afterSaveContainer = document.querySelector("#containerAfterSave");
+
+  afterSaveContainer.classList.remove("hidden");
+
+  var formDone = document.querySelector("#form");
+    formDone.classList.add("hidden");
+
 }
 
 //shows stored results in generated table
@@ -474,18 +473,12 @@ function restart() {
     /**
      * hides buttons and form after clicking restart button
      */
-    var formDone = document.querySelector("#form");
-    formDone.classList.add("hidden");
+    
 
-    var buttonHighScore = document.querySelector("#score-container");
-    buttonHighScore.classList.add("hidden");
+    var containerAfterSave = document.querySelector("#containerAfterSave");
+    containerAfterSave.classList.add("hidden");
 
-    var buttonRestart = document.querySelector("#restart-btn");
-    buttonRestart.classList.add("hidden");
-
-    var buttonClearScore = document.querySelector("#clear-score-btn");
-    buttonClearScore.classList.add("hidden");
-    /**
+        /**
      * ===================================
      */
   

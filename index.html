@@ -38,41 +38,24 @@
         </div>
     </div>
 
-    <div id="quiz-main" class="hidden">
-        <div class="d-flex flex-row border-bottom justify-content-between">
 
-            <div id="questionContainer">
-                <!-- now ol goes here -->
-            </div>
-            <div>
-                <!-- Time: Must be shown timer-->
-                <h1 class="time p-3 border bg-light" style="text-align:center">Time to begin!</h1>
-
-            </div>
-        </div>
-
-    </div>
     <div id="main">
+        <div id="quiz-main" class="hidden">
+            <div class="d-flex flex-row border-bottom justify-content-between">
+
+                <div id="questionContainer">
+                    <!-- now ol goes here -->
+                </div>
+                <div>
+                    <!-- Time: Must be shown timer-->
+                    <h1 class="time p-3 border bg-light" style="text-align:center">Time to begin!</h1>
+
+                </div>
+            </div>
+
+        </div>
         <div id="correctness" class="hidden">
 
-        </div>
-
-    </div>
-
-    <div class="d-flex flex-column">
-
-        <div id="score-container" class="hidden">
-            <button type="button" class="btn btn-light start-btn" onclick="viewScore()">View Highscores</button>
-            
-
-        </div>
-        <div class="d-flex justify-content-around">
-            <button id="restart-btn" type="button" class="btn btn-primary hidden" onclick="restart()">
-                RESTART
-            </button>
-            <button id="clear-score-btn"type="button" class="btn btn-primary hidden" onclick="clearScore()">
-                Clear Highscore
-            </button>
         </div>
 
     </div>
@@ -84,8 +67,26 @@
         <button onclick="saveScores()">Submit</button>
     </form>
 
+
+    <div id="containerAfterSave" class="hidden">
+        <div class="d-flex flex-column">
+
+            <div id="score-container">
+                <button type="button" class="btn btn-light start-btn" onclick="viewScore()">View Highscores</button>
+            </div>
+            <div class="d-flex justify-content-around">
+                <button id="restart-btn" type="button" class="btn btn-primary" onclick="restart()">
+                    RESTART
+                </button>
+                <button id="clear-score-btn" type="button" class="btn btn-primary" onclick="clearScore()">
+                    Clear Highscore
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="./script.js"></script>
-    
+
 
 </body>
 
