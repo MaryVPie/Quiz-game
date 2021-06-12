@@ -213,7 +213,6 @@ function startQuiz() {
 
 }
 
-
 //function renders random question
 function renderQuestion(element) {
   let result = questions.filter(question => !question.wasAsked);
@@ -294,12 +293,17 @@ function setTime() {
 
   // Selects element by class
   var timeEl = document.querySelector(".time");
+
+  if (timeEl.classList.contains("hidden")) {     //true or false
+    timeEl.classList.remove("hidden");
+  }
   // Sets interval in variable
   timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = "Time: " + secondsLeft;
 
     if (secondsLeft === 0) {
+
       // Calls function to create and append image
       endQuiz(timerInterval, timeEl);
     }
@@ -310,6 +314,7 @@ function setTime() {
 // Function to create and append image at the end of the quiz
 function endQuiz(timer, timeEl) {
 
+  timeEl.classList.add("hidden");
   timeEl.textContent = " ";
   // Stops execution of action at set interval
   clearInterval(timer);
@@ -338,8 +343,6 @@ function endQuiz(timer, timeEl) {
   yourScore.innerHTML = "Your score is: " + sessionHighscore;
   //debugger;
 }
-
-
 
 function calculateScore() {
 
@@ -461,8 +464,6 @@ function clearScore() {
   localStorage.clear();
 }
 
-
-
 function restart() {
  //iterates questions array and resets 2 properties
   for (let idx = 0; idx < questions.length; idx++) {
@@ -486,13 +487,6 @@ function restart() {
   startQuiz();
   
 }
-
-
-
-
-
-
-
 
 //generate random value from 0 to max not including max
 function getRandomInt(max) {
